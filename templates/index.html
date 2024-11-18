@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('static/uploads/large-green-rice-field-with-green-rice-plants-rows.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 70px;
+            background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for better readability */
+        }
+
+        .green-row {
+            background-color: #4CAF50; /* Green color */
+            height: 70px; /* Default height */
+            width: 100%; /* Take the full width */
+            position: fixed; /* Stick to top or bottom */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure it's on top of other content */
+            display: flex; /* Enable flexbox layout */
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            color: white; /* Text color */
+            font-size: 18px; /* Font size */
+        }
+
+        .green-row.top {
+            top: 0;
+            font-size: 50px;
+        }
+
+        .green-row.bottom {
+            bottom: 0; /* Stick to the bottom */
+        }
+
+        /* Style for the instruction note */
+        .instruction-note {
+            position: fixed;
+            top: 50%; /* Adjust the distance from the top */
+            right: 20px; /* Adjust the distance from the right */
+            background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #333;
+            transform: translateY(-50%);
+
+        }
+
+        .choose-file-text {
+        padding: 5px 10px; /* Adjust padding */
+        background-color: white; /* White background */
+        border: 2px solid #333; /* Green border */
+        border-radius: 5px; /* Add border radius */
+        color: #333; /* Text color */
+        font-weight: bold; /* Make text bold */
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="green-row top">
+        <div class="green-row-text">ধানের পাতার ছত্রাকাণ্ড রোগ শনাক্তকরণ</div>
+    </div>
+    <div class="container">
+        <h1>ছবি শনাক্তকারী</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" >
+            <button type="submit">ছবি সাবমিট করুন</button>
+        </form>
+        {% if prediction %}
+            <h2> ফলাফল: {{ prediction }}</h2>
+            <img src="{{ image_file }}" alt="Uploaded Image" style="max-width: 300px;">
+        {% endif %}
+    </div>
+    <div class="green-row bottom"></div>
+
+    <!-- Instruction Note -->
+    <div class="instruction-note">
+        <p style="text-align: center;"> নির্দেশাবলী! </p>
+        <p>
+            ১. প্রথমে
+            <span class="choose-file-text">Choose File</span>
+            এ ক্লিক করুন
+        </p>
+        <p> ২. এবার আপনার পছন্দের ছবি নির্বাচন করুন </p>
+        <p> ৩. অতঃপর ছবি সাবমিট বাটনে ক্লিক করুন </p>
+        <p> ৪. এবার ফলাফল দেখুন </p>
+    </div>
+</body>
+</html>
